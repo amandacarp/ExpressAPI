@@ -9,7 +9,7 @@ function getAllChirps() {
             <div class="card-body">
               <h5 class="card-title">${chirp.user}</h5>
               <p class="card-text">${chirp.msg}</p>
-              <a class="card-link text-success">Edit Chirp</a>
+              <a onclick="editChirp(${chirp.id, chirp.user, chirp.msg})" class="card-link text-success">Edit Chirp</a>
               <a onclick="deleteChirp(${chirp.id})" class="card-link text-success">Delete Chirp</a>
             </div>
           </div>`).appendTo('#chirpsContainer')
@@ -40,6 +40,16 @@ function deleteChirp(id) {
         alert(`Chirp #${id} deleted!`)
         $('#chirpsContainer').empty()
         getAllChirps();
+    })
+}
+
+function editChirp(id){
+    $.ajax({
+        method: "PUT",
+        url: `http://localhost:3000/api/chirps/${id}`
+    })
+    .then((chirp) => {
+        console.log(chirp)
     })
 }
 
