@@ -7,6 +7,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json()); //parse json
+app.use(express.urlencoded({ extended: false }));
+
 
 app.use('/api', apiRouter)
 

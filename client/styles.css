@@ -1,0 +1,41 @@
+#navbar{
+    font-size: 30px;
+    font-family: 'Yusei Magic', sans-serif;
+}
+
+#nav{
+    background-color: teal;
+    font-family: 'Yusei Magic', sans-serif;
+}
+
+#createButton{
+    border-color: teal;
+    border-width: 0.15em;
+    background-color: black;
+    color: white;
+    font-family: 'Yusei Magic', sans-serif;
+}
+
+#edit{ 
+    border-color: teal;
+    background-color: black;
+    color:white;
+    border-width: 0.2em;
+    font-family: 'Yusei Magic', sans-serif;
+}
+
+#delete{
+    border-color: teal;
+    background-color: black;
+    color: white;
+    border-width: 0.2em;
+    font-family: 'Yusei Magic', sans-serif;
+}
+
+#cardTitle{
+    font-family: 'Yusei Magic', sans-serif;
+}
+
+#cardBody{
+    font-family: 'Yusei Magic', sans-serif;
+}
