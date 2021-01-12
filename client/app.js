@@ -1,3 +1,4 @@
+
 //function to retrieve all chirps and place in card
 function getAllChirps() {
     $.ajax({
@@ -12,13 +13,13 @@ function getAllChirps() {
                 <div class="card-body">
                     <h5 id="cardTitle" class="card-title">${chirp.user}</h5>
                     <p id="cardBody" class="card-text">${chirp.msg}</p>
-                    <button onclick="editChirp(${chirp.id})" id="edit" class="btn-sm  a data-toggle="modal" href="#myModal">Edit Chirp</button>
+                    <button onclick="editChirp('${chirp.id}', '${chirp.user}', '${chirp.msg}')" id="edit" class="btn-sm">Edit Chirp</button>
                     <button onclick="deleteChirp(${chirp.id})" id="delete" class="btn-sm">Delete Chirp</button>
                 </div>
                 </div> 
                 </div>
                 </div>`)
-                .appendTo('#chirpsContainer')
+                    .appendTo('#chirpsContainer')
             })
         })
 }
@@ -30,7 +31,7 @@ function createChirp() {
     $.ajax({
         method: 'POST',
         url: "http://localhost:3000/api/chirps",
-        data: { user: user, msg: msg }
+        data: { user, msg }
     })
         .then(() => {
             $('#chirpsContainer').empty()
@@ -54,17 +55,26 @@ function deleteChirp(id) {
 }
 
 //funciton to edit a chirp
-function editChirp(id) {
-    $.ajax({
-        method: "PUT",
-        url: `http://localhost:3000/api/chirps/${id}`
+function editChirp(id, user, msg) {
+    Swal.fire({
+        title: `Edit Chirp # ${id}`,
+        text: `Editing ${user}'s chirp`,
+        input: 'textarea',
+        inputValue: msg,
+        confirmButtonText: 'Save Edit',
+        preConfirm: editedMessage => {
+            $.ajax({
+                method: "PUT",
+                url: `http://localhost:3000/api/chirps/${id}`,
+                data: { user, msg: editedMessage }
+            })
+                .then(() => {
+                    $('#chirpsContainer').empty()
+                    getAllChirps()
+                })
+                .catch(e => Swal.showValidationMessage(`Request failed ${e}`));
+        }
     })
-        .then((chirp) => {
-            console.log(chirp)
-            // $("#myModal").modal('show')
-            // $('#chirpsContainer').empty()
-            // getAllChirps();
-        })
 }
 
 //get all chirps on page load

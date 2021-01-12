@@ -6,7 +6,7 @@ router.get('/:id?', (req, res, next) => {
     const id = req.params.id
     const chirps = id ? chirpsStore.GetChirp(id) : chirpsStore.GetChirps()
     if(id){
-        res.json(chirps) //same as .send but lets you send objects
+        res.json({id: id, ...chirps}) //same as .send but lets you send objects
     } else {
         const newChirps = Object.keys(chirps).map(key => {
             return {
