@@ -1,4 +1,3 @@
-
 //function to retrieve all chirps and place in card
 function getAllChirps() {
     $.ajax({
@@ -48,7 +47,11 @@ function deleteChirp(id) {
         url: `http://localhost:3000/api/chirps/${id}`
     })
         .then(() => {
-            alert(`Chirp #${id} deleted!`)
+            Swal.fire({
+                title: `Chirp #${id} Deleted!`,
+                icon: 'success',
+                timer: 1500
+            })
             $('#chirpsContainer').empty()
             getAllChirps();
         })

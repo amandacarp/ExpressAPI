@@ -16,7 +16,7 @@ router.get('/:id?', (req, res, next) => {
             }
         })
         newChirps.pop()
-        res.json(newChirps)
+        res.json(newChirps.reverse())
     }   
 })
 
